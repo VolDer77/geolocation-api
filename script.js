@@ -1,8 +1,13 @@
 const user = prompt("Hello! What's your name?");
-document.getElementById('user').textContent = `Hello ${user}!`;
+const start = document.querySelector('.start');
+const tempDiv = document.createElement('p');
 const button = document.querySelector('.button');
 
-if ("geolocation" in navigator) {
+document.getElementById('user').textContent = `Hello ${user}!`;
+tempDiv.textContent = 'Access your geolocation so the app works properly (top left corner)';
+start.append(tempDiv);
+
+try {
     navigator.geolocation.getCurrentPosition(position => {
         const longitude = position.coords.longitude;
         const latitude = position.coords.latitude;
@@ -16,7 +21,9 @@ if ("geolocation" in navigator) {
             e.preventDefault();
             const myMap = L.map('map').setView(coordinates, 16);
             const marker = L.marker(coordinates).addTo(myMap);
-            const popup = L.popup({ maxWidth: 120 })
+            const popup = L.popup({
+                maxWidth: 120
+            })
                 .setLatLng(coordinates)
                 .setContent(`<p>Geolocation accuracy in this api for your location is ${accuracy}m.</p>`)
                 .openOn(myMap);
@@ -30,10 +37,15 @@ if ("geolocation" in navigator) {
                 accessToken: 'pk.eyJ1Ijoidm9sZGVyNzciLCJhIjoiY2tlMTJ1cW43NDB6MDJzcGFrYnVtN2UxeiJ9.5ST6fZIH26GjPMRogYU2pg'
             }).addTo(myMap);
 
-        })
 
+        });
+
+        tempDiv.remove();
+
+    }, () => {
+        throw new Error('Geolocation is not available');
     });
 
-} else {
-    throw Error('Geolocation is not available')
+} catch (e) {
+    console.log(e);
 }
