@@ -34,7 +34,7 @@ try {
                 id: 'mapbox/streets-v11',
                 tileSize: 512,
                 zoomOffset: -1,
-                accessToken: 'pk.eyJ1Ijoidm9sZGVyNzciLCJhIjoiY2tlMTJ1cW43NDB6MDJzcGFrYnVtN2UxeiJ9.5ST6fZIH26GjPMRogYU2pg'
+                accessToken: 'your_token'
             }).addTo(myMap);
 
 
