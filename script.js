@@ -5,7 +5,7 @@ const button = document.querySelector('.button');
 tempDiv.textContent = 'Access your geolocation so the app works properly (top left corner)';
 greeting.append(tempDiv);
 
-const coordinates = {};
+const coordinates = {}; 
 
 function createMap() {
     const myMap = L.map('map').setView([coordinates.lat, coordinates.lon], 16);
